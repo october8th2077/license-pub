@@ -2,9 +2,9 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-2.1.0-blue)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![Status](https://img.shields.io/badge/status-active-success)
-![IntelliJ](https://img.shields.io/badge/IntelliJ-2023.2+-orange)
+![IntelliJ](https://img.shields.io/badge/IntelliJ-2022.3+-orange)
 
 **自动化、智能化、可视化的代码评审插件**
 
@@ -100,7 +100,7 @@
 
 **Settings → Tools → Auto Git CR**
 
-![Settings](doc/confPage.png)
+![Settings](https://github.com/october8th2077/license-pub/blob/main/pic/auto-git-cr-cfg-demo.png?raw=true)
 
 ### 1. 配置管理 (Profile)
 - **多配置支持**：可以保存多套配置 (如 "Gemini Pro", "GPT-4", "Company Internal")。
