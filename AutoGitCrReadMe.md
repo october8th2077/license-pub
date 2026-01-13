@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Version](https://img.shields.io/badge/version-1.0.2-blue)
 ![Status](https://img.shields.io/badge/status-active-success)
 ![IntelliJ](https://img.shields.io/badge/IntelliJ-2022.3+-orange)
 
@@ -27,16 +27,16 @@
 插件不会简单粗暴地截断 Diff，而是采用 **File-Level Splitting** 策略：
 
 1. **单文件熔断保护**：
-   - 对单个文件的变动实施 **3000字符** (默认) 限制。
-   - **场景**：删除了一个 2万行的 `doc.md`？插件会保留文件头和前3000字符，后续截断。
-   - **效果**：大文件变动仅占用约 4% 的 Token，确保核心业务代码 (如 `*.kt`, `*.java`) 能够完整保留。
+    - 对单个文件的变动实施 **3000字符** (默认) 限制。
+    - **场景**：删除了一个 2万行的 `doc.md`？插件会保留文件头和前3000字符，后续截断。
+    - **效果**：大文件变动仅占用约 4% 的 Token，确保核心业务代码 (如 `*.kt`, `*.java`) 能够完整保留。
 
 2. **全局智能豁免**：
-   - 如果总 Diff 大小未超过全局限制 (默认 50000 字符)，则**不进行任何截断**，保留完整上下文。
+    - 如果总 Diff 大小未超过全局限制 (默认 50000 字符)，则**不进行任何截断**，保留完整上下文。
 
 3. **Diff 上下文模式**：
-   - **Context Lines**: 仅包含变动行周围的 N 行 (默认 3 行)，节省 Token。
-   - **Full Method**: 使用 `git diff -W`，包含完整的函数/方法上下文，让 AI 更精准理解修改意图 (消耗更多 Token)。
+    - **Context Lines**: 仅包含变动行周围的 N 行 (默认 3 行)，节省 Token。
+    - **Full Method**: 使用 `git diff -W`，包含完整的函数/方法上下文，让 AI 更精准理解修改意图 (消耗更多 Token)。
 
 ## ✨ 特性亮点
 
@@ -111,10 +111,10 @@
 - **Conf Name**: 配置别名
 - **LLM Model**: 模型名称 (如 `gemini-1.5-pro-latest`, `gpt-4o`)
 - **API Key**: 对应的 API Key
-- **Request URL**: 
-  - **Gemini**: 自动识别，无需填写 (除非使用代理)
-  - **Dify**: 填写 `http://.../v1` 或 `http://.../chat-messages`，插件会自动适配 Dify 协议。
-  - **OpenAI/Compatible**: 填写完整 API Endpoint (如 `https://api.openai.com/v1/chat/completions`)
+- **Base URL**:
+    - **Gemini**: 自动识别，无需填写 (除非使用代理)
+    - **Dify**: 填写 `http://.../v1` 或 `http://.../chat-messages`，插件会自动适配 Dify 协议。
+    - **OpenAI/Compatible**: 填写完整 API Endpoint (如 `https://api.openai.com/v1/chat/completions`)
 
 ### 3. 高级设置 (Advanced Settings)
 
@@ -175,8 +175,8 @@ throw ResponseParsingException("Gemini response parsing error: $bodyString", e)
 **影响**: 其他开发者可能误认为该常量存在线程安全风险导致重复创建
 **修复建议**:
 ```kotlin
-/** 
- * Thread-safe media type for JSON requests 
+/**
+ * Thread-safe media type for JSON requests
  * 由OkHttpClient保证线程安全
  */
 private val JSON_MEDIA_TYPE = "application/json; charset=utf-8".toMediaType()
@@ -316,16 +316,22 @@ graph LR
 
 ## 📝 更新日志
 
-### v2.1.0 (2026-01-09)
-- ✨ **Dify 支持**：完美支持 Dify Agent API 调用。
-- 🔄 **智能重试**：首选模型失败时，自动轮询备用配置。
-- 🛠 **高级 Diff 控制**：支持 `Context Lines` 与 `Full Method (-W)` 切换。
-- ⚡️ **Kotlin 重构**：移除 Python 依赖，核心逻辑全 Kotlin 实现，更快更稳。
-- 🐛 **UI 优化**：改进配置页布局，支持多行忽略列表。
+### v1.0.2
+- 🌍 **多语言支持** - 新增中英文多语言支持 (English/Chinese)。
+- 🧪 **连接测试** - 新增测试按钮，快速验证模型配置。
+- 🟢 **状态指示** - 下拉菜单显示配置连接状态 (红/绿)。
+- 🐛 **兼容性修复** - 修复 IDE 版本兼容性，支持 2025.1+。
 
-### v2.0.0
-- 🎨 报告格式全面优化，引入表格与色彩分级。
-- 📦 智能 Diff 分片与截断保护。
+### v1.0.1
+- 🔄 **智能重试** - 失败自动切换下一套配置。
+- ⚙️ **多配置管理** - 支持多套配置并自动排序。
+- 🛠 **高级设置** - 支持 Diff 上下文行数与完整方法切换。
+
+### v1.0.0
+- 🚀 **自动化评审** - Git 提交后自动触发 AI 代码评审。
+- 🤖 **模型支持** - 支持 Gemini 和 OpenAI/Compatible 模型。
+- 📝 **Markdown 报告** - 生成包含评分与建议的详细 Markdown 报告。
+- 🔔 **即时通知** - 评审完成后发送包含摘要和评分的通知。
 
 ---
 
